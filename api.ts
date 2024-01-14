@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const product = await DB.product.findMany();
+    const product = await DB.product.findMany({include: {imageUrl: true ,sizes: true,}});
     res.status(200).json(product);
   } catch (error: any) {
     res.status(500).json({ error: "Something went wrong" });
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    var _id = number().parse(id);
+    var _id = number().parse(Number.parseInt(id));
     const product = await DB.product.findUniqueOrThrow({
       where: {
         id: _id,
