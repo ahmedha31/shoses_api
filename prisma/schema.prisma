@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Product {
-  id          Int   @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   category    String
   imageUrl    image[]
@@ -25,11 +25,11 @@ model Product {
 }
 
 model image {
-  id        String    @id @default(cuid())
   name      String
-  url       String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  url       String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   Product   Product[]
 }
 
@@ -40,5 +40,3 @@ model size {
   updatedAt DateTime  @updatedAt
   Product   Product[]
 }
-
-
